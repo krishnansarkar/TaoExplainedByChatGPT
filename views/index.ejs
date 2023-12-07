@@ -1,0 +1,35 @@
+<%- include("partials/header.ejs") %>
+
+<% if(!locals.error) { %>
+  <p><%= quote %></p>
+  <% if(locals.analysis) { %>
+    <p><%= analysis %></p>
+  <% } else { %>
+    <p id="loading-text">Loading response from Chat GPT...</p>
+    <script>
+      async function fetchAnalysisAndUpdate() {
+        try {
+          const response = await fetch("/analysis", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({data: `<%= quote %>`})
+            }
+          );
+          const data = await response.json();
+          document.getElementById("loading-text").innerText = data.analysis;
+          console.log(data.analysis);
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      
+      document.addEventListener('DOMContentLoaded', fetchAnalysisAndUpdate);
+    </script>
+  <% } %>
+<% } else { %>
+  <p><%= error %></p>
+<% } %>
+
+<%- include("partials/footer.ejs") %>
