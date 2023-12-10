@@ -16,7 +16,6 @@ app.post("/analysis", async (req, res) => {
   //console.log(req);
   const randomQuote = req.body.quote;
   const apiKey = req.body.apikey;
-  console.log(`API Key is ${apiKey}`);
   res.type("json");
   /*res.send({
     analysis: randomQuote
