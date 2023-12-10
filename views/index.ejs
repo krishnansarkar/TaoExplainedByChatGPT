@@ -1,7 +1,7 @@
 <%- include("partials/header.ejs") %>
 
 <% if(!locals.error) { %>
-  <p id="quote"><%= quote %></p>
+  <p id="quote"><%- quote %></p>
   <form id="analyze-form">
     <label for="apikey">OpenAI API Key:</label><br>
     <input type="text" id="apikey" name="apikey">

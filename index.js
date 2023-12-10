@@ -1,5 +1,6 @@
 import express from "express";
 import axios from "axios";
+import taoVerses from "./taoteching.js"
 
 const app = express();
 const port = 3000;
@@ -75,22 +76,14 @@ app.post("/analysis", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
-  const randomQuote = taoQuotes[Math.floor(Math.random() * taoQuotes.length)]
+  const verseNumber = Math.floor(Math.random() * taoVerses.length)
+  const randomQuote = taoVerses[verseNumber];
+  const processedRandomQuote = verseNumber + ".<br><br>" + randomQuote.replace(new RegExp("\n", "g"), "<br>");
   res.render("index.ejs", {
-    quote: randomQuote
+    quote: processedRandomQuote
   });
 })
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-const taoQuotes = [
-  `"Simplicity, patience, compassion.
-    These three are your greatest treasures.
-    Simple in actions and thoughts, you return to the source of being.
-    Patient with both friends and enemies,
-    you accord with the way things are.
-    Compassionate toward yourself,
-    you reconcile all beings in the world."`
-];
