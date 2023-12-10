@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(express.static("public"));
 
 const apiEndpoint = "https://api.openai.com/v1/chat/completions";
 //const apiKey = "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";
@@ -27,7 +28,7 @@ app.post("/analysis", async (req, res) => {
         messages: [
           {
             "role": "system",
-            "content": "Explain the meaning of the Taoist quote you are provided."
+            "content": "As a Taoist expert, Explain the meaning of the quote you are provided."
           },
           {
             "role": "user",
@@ -70,9 +71,6 @@ app.post("/analysis", async (req, res) => {
         analysis: "Something went wrong."
       });
     }
-    res.render("index.ejs", {
-      error: error.message,
-    });
   }
 });
 
