@@ -2,11 +2,39 @@
 
 <% if(!locals.error) { %>
   <p><%= quote %></p>
+  <form id="analyze-form">
+    <label for="apikey">OpenAI API Key:</label><br>
+    <input type="text" id="apikey" name="apikey">
+    <input type="submit" vale="Analyze">
+  </form>
   <% if(locals.analysis) { %>
     <p><%= analysis %></p>
   <% } else { %>
     <p id="loading-text">Loading response from Chat GPT...</p>
     <script>
+      document.getElementById("analyze-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        try {
+          const response = await fetch("/analysis", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                apikey: formData.get("apikey"),
+                quote: `<%= quote %>`
+              })
+            }
+          );
+          const data = await response.json();
+          document.getElementById("loading-text").innerText = data.analysis;
+        } catch (error) {
+          console.error(error.message);
+        }
+      });
+    </script>
+    <!--<script>
       async function fetchAnalysisAndUpdate() {
         try {
           const response = await fetch("/analysis", {
@@ -26,7 +54,7 @@
       }
       
       document.addEventListener('DOMContentLoaded', fetchAnalysisAndUpdate);
-    </script>
+    </script>-->
   <% } %>
 <% } else { %>
   <p><%= error %></p>

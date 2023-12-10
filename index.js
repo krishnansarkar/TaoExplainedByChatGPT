@@ -7,12 +7,14 @@ const port = 3000;
 app.use(express.json());
 
 const apiEndpoint = "https://api.openai.com/v1/chat/completions";
-const apiKey = "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";
+//const apiKey = "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";
 
 app.post("/analysis", async (req, res) => {
   //console.log(req.body.data);
   //console.log(req);
-  const randomQuote = req.body.data;
+  const randomQuote = req.body.quote;
+  const apiKey = req.body.apikey;
+  console.log(`API Key is ${apiKey}`);
   res.type("json");
   /*res.send({
     analysis: randomQuote
