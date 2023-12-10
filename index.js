@@ -29,7 +29,7 @@ app.post("/analysis", async (req, res) => {
         messages: [
           {
             "role": "system",
-            "content": "As a Taoist expert, Explain the meaning of the quote you are provided."
+            "content": "Explain the meaning of the Taoist verse you are provided."
           },
           {
             "role": "user",
@@ -46,7 +46,6 @@ app.post("/analysis", async (req, res) => {
     );
     const result = response.data;
     const analysis = result.choices[0].message.content
-    console.log(analysis);
     res.send({
       analysis: analysis
     });
@@ -78,7 +77,7 @@ app.post("/analysis", async (req, res) => {
 app.get("/", async (req, res) => {
   const verseNumber = Math.floor(Math.random() * taoVerses.length)
   const randomQuote = taoVerses[verseNumber];
-  const processedRandomQuote = verseNumber + ".<br><br>" + randomQuote.replace(new RegExp("\n", "g"), "<br>");
+  const processedRandomQuote = (verseNumber+1) + ".<br><br>" + randomQuote.replace(new RegExp("\n", "g"), "<br>");
   res.render("index.ejs", {
     quote: processedRandomQuote
   });

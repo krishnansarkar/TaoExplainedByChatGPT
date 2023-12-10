@@ -1,0 +1,30 @@
+h1 {
+  text-align: center;
+  border-bottom: solid 2pt;
+  margin: 0px;
+  padding: 10px;
+}
+
+h2 {
+  text-align: center;
+}
+
+label {
+  font-style: italic;
+}
+
+.container {
+  margin: auto;
+  max-width: 1000px;
+}
+
+.content {
+  padding: 8px;
+  width: fit-content;
+  margin: auto; 
+  border-bottom: solid 2pt;
+}
+
+.footer {
+  text-align: center;
+}

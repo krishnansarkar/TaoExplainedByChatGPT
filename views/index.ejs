@@ -1,16 +1,27 @@
 <%- include("partials/header.ejs") %>
 
-<% if(!locals.error) { %>
-  <p id="quote"><%- quote %></p>
-  <form id="analyze-form">
-    <label for="apikey">OpenAI API Key:</label><br>
-    <input type="text" id="apikey" name="apikey">
-    <input type="submit" vale="Analyze">
-  </form>
-  <p id="analysis">Awaiting Key</p>
-  <script src="/scripts/form-submission.js"></script>
-<% } else { %>
-  <p><%= error %></p>
-<% } %>
+<h1>Tao Te Ching Explained By Chat GPT</h1>
+<div class="container">
+  <% if(!locals.error) { %>
+    <div class="content">
+      <h2>Verse</h2>
+      <p id="quote"><%- quote %></p>
+    </div>
+    <div class="content">
+      <form id="analyze-form">
+        <label for="apikey">OpenAI API Key:</label><br>
+        <input type="text" id="apikey" name="apikey">
+        <input type="submit" vale="Analyze">
+      </form>
+    </div>
+    <div class="content">
+      <h2>Output</h2>
+      <p id="analysis"></p>
+    </div>
+    <script src="/scripts/form-submission.js"></script>
+  <% } else { %>
+    <p><%= error %></p>
+  <% } %>
+</div>
 
 <%- include("partials/footer.ejs") %>
