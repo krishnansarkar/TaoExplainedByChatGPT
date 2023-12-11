@@ -8,3 +8,5 @@ npm install
 node index.js
 ```
 Open [localhost:3000](localhost:3000) on web browser.
+## What It Looks Like
+![Example Gif](example.gif)
